@@ -57,7 +57,7 @@ function msgToggleRoles(message) {
     else if (role === "switch")                         role_id = config.switch_id;
     else if (role === "f" || role === "fandom")         role_id = config.F_id;
     else if (role === "d" || role === "dark")           role_id = config.D_id;
-    else if (role === "nh" || role === "non humanoid")  role_id = config.NH_id;
+    else if (role === "nh" || role === "non-humanoid")  role_id = config.NH_id;
     else if (role === "k" || role === "kink")           role_id = config.K_id;
     else if (role === "p" || role === "porn")           role_id = config.P_id;
     else {
