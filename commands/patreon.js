@@ -10,7 +10,12 @@ module.exports = {
         args[0] = args[0].toLowerCase();
 
         if (args.length < 2) {
-            message.reply("the Patreon commands should look something like this:\n\n`+patreon credit <name>`\n`+patreon headpats <staff-username>`\n\n");
+            message.reply("the Patreon commands should look something like this:\n\n`+patreon credit <name>`\n`+patreon headpats <staff-username>`\n\n")
+            .then(msg => {
+                msg.delete({timeout:10000}) // Delete reply after 10 seconds.
+            })
+            .catch();
+            message.delete(); // Delete the user's message.
             return;
         }
         else if (args[0] === 'credit') {
@@ -22,8 +27,12 @@ module.exports = {
             channel.send(`🔹 <@${message.member.id}> used the \`+patreon headpats\` command!\n\nStaff member to give headpats: ${args.slice(1).join(' ')}\n*Please react to this post if your name appeared and you have sent the user headpats.*`);
         }
         else {
-            message.reply("Something went wrong! Please try again.");
-            message.channel.send('Your args are: ' + args);
+            message.reply("Something went wrong! Please try again.")
+            .then(msg => {
+                msg.delete({timeout:10000}) // Delete reply after 10 seconds.
+            })
+            .catch();
+            message.delete(); // Delete the user's message.
             return;
         }
 
@@ -34,6 +43,7 @@ module.exports = {
         const random_2 = Math.floor(Math.random() * method_object.length);
 
         message.reply("thanks for the info! I've sent it safely to the Kinkdom staff using a team of " + method_attribute[random_1] + " delivery " + method_object[random_2] + ".");
+        message.delete(); // Delete the user's message.
 
     }
 };
