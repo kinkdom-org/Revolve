@@ -34,6 +34,7 @@ client.on('message', message => {
     if (message.author.bot) return;
     if (message.content.startsWith(config.prefix)) msgCommand(message);
     if (message.channel.id === id.assign_roles) msgToggleRoles(message);
+    if (message.channel.id === id.patron_chat) msgPatron(message);
 
 });
 
@@ -86,5 +87,12 @@ function msgToggleRoles(message) {
     message.delete(); // Delete the user's message.
 
 };
+
+function msgPatron(message) {
+
+    method_attribute = ['flying', 'skilled', 'rolling', 'specialized', 'climbing', 'secret', 'highly educated', 'tiny'];
+    method_object = ['pidgeons', 'polar bears', 'kittens', 'penguins', 'sharks', 'trucks', 'turtles', 'pandas', 'nuggets', 'monkeys'];
+    
+}
 
 client.login(config.token);
