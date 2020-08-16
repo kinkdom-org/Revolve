@@ -2,6 +2,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const config = require('./config.json');
 const id = require('./variables/ids.json');
+const embed = require('./modules/embed.js');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -21,12 +22,22 @@ client.once('ready', () => {
 
 client.on('guildMemberAdd', member => {
 
-    const channel = member.guild.channels.cache.get(id.welcome_chat);
+    const log_channel = member.guild.channels.cache.get(id.log_channel);
+    log_channel.send(embed.join(member));
+
+    const welcome_chat = member.guild.channels.cache.get(id.welcome_chat);
     const welcome_channel = member.guild.channels.cache.get(id.welcome).toString();
 
     const random = Math.floor(Math.random() * welcome_msgs.length);
 
-    channel.send(`:ballot_box_with_check:  ${welcome_msgs[random]}, ${member}! To get started, please follow the steps in ${welcome_channel}. If you need help, feel free to ask in chat or contact a staff member!`);
+    welcome_chat.send(`:ballot_box_with_check:  ${welcome_msgs[random]}, ${member}! To get started, please follow the steps in ${welcome_channel}. If you need help, feel free to ask in chat or contact a staff member!`);
+
+});
+
+client.on('guildMemberRemove', member => {
+
+    const log_channel = member.guild.channels.cache.get(id.log_channel);
+    log_channel.send(embed.leave(member));
 
 });
 
@@ -35,7 +46,7 @@ client.on('message', message => {
     if (message.content.startsWith(config.prefix)) msgCommand(message);
     if (message.channel.id === id.assign_roles) msgToggleRoles(message);
     if (message.channel.id === id.patron_chat) msgPatron(message);
-
+    if (message.channel.id === id.testing) message.channel.send(embed.leave(message.member));
 });
 
 function msgCommand(message) {
@@ -92,7 +103,7 @@ function msgPatron(message) {
 
     method_attribute = ['flying', 'skilled', 'rolling', 'specialized', 'climbing', 'secret', 'highly educated', 'tiny'];
     method_object = ['pidgeons', 'polar bears', 'kittens', 'penguins', 'sharks', 'trucks', 'turtles', 'pandas', 'nuggets', 'monkeys'];
-    
+
 }
 
 client.login(config.token);
