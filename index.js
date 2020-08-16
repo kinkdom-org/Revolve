@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const config = require('./variables/config.json');
+const config = require('./config.json');
 const id = require('./variables/ids.json');
 
 const client = new Discord.Client();
