@@ -13,6 +13,8 @@ for (const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 
+const welcome_msgs = ["Welcome to Kinkdom", "Welcome aboard", "Hello, and welcome", "Welcome to the Kinkdom Empire", "Greetings"];
+
 client.once('ready', () => {
 	console.log('Ready!\n');
 });
@@ -21,7 +23,10 @@ client.on('guildMemberAdd', member => {
 
     const channel = member.guild.channels.cache.get(id.welcome_chat);
     const welcome_channel = member.guild.channels.cache.get(id.welcome).toString();
-    channel.send(`:ballot_box_with_check:  Welcome to Kinkdom, ${member}! To get started, please follow the steps in ${welcome_channel}. If you need help, feel free to ask in chat or contact a staff member!`);
+
+    const random = Math.floor(Math.random() * welcome_msgs.length);
+
+    channel.send(`:ballot_box_with_check:  ${welcome_msgs[random]}, ${member}! To get started, please follow the steps in ${welcome_channel}. If you need help, feel free to ask in chat or contact a staff member!`);
 
 });
 
