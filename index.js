@@ -1,6 +1,7 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const config = require('./config.json');
+const config = require('./variables/config.json');
+const id = require('./variables/ids.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -18,8 +19,8 @@ client.once('ready', () => {
 
 client.on('guildMemberAdd', member => {
 
-    const channel = member.guild.channels.cache.get(config.welcome_chat_id);
-    const welcome_channel = member.guild.channels.cache.get(config.welcome_id).toString();
+    const channel = member.guild.channels.cache.get(id.welcome_chat);
+    const welcome_channel = member.guild.channels.cache.get(id.welcome).toString();
     channel.send(`:ballot_box_with_check:  Welcome to Kinkdom, ${member}! To get started, please follow the steps in ${welcome_channel}. If you need help, feel free to ask in chat or contact a staff member!`);
 
 });
@@ -27,7 +28,7 @@ client.on('guildMemberAdd', member => {
 client.on('message', message => {
     if (message.author.bot) return;
     if (message.content.startsWith(config.prefix)) msgCommand(message);
-    if (message.channel.id === config.assign_roles_id) msgToggleRoles(message);
+    if (message.channel.id === id.assign_roles) msgToggleRoles(message);
 
 });
 
@@ -51,15 +52,15 @@ function msgToggleRoles(message) {
     const role = message.content.toLowerCase();
     let role_id = "";
     
-    if      (role === "events" || role === "event")     role_id = config.events_id;
-    else if (role === "dom")                            role_id = config.dom_id;
-    else if (role === "sub")                            role_id = config.sub_id;
-    else if (role === "switch")                         role_id = config.switch_id;
-    else if (role === "f" || role === "fandom")         role_id = config.F_id;
-    else if (role === "d" || role === "dark")           role_id = config.D_id;
-    else if (role === "nh" || role === "non-humanoid")  role_id = config.NH_id;
-    else if (role === "k" || role === "kink")           role_id = config.K_id;
-    else if (role === "p" || role === "porn")           role_id = config.P_id;
+    if      (role === "events" || role === "event")     role_id = id.events;
+    else if (role === "dom")                            role_id = id.dom;
+    else if (role === "sub")                            role_id = id.sub;
+    else if (role === "switch")                         role_id = id.switch;
+    else if (role === "f" || role === "fandom")         role_id = id.F;
+    else if (role === "d" || role === "dark")           role_id = id.D;
+    else if (role === "nh" || role === "non-humanoid")  role_id = id.NH;
+    else if (role === "k" || role === "kink")           role_id = id.K;
+    else if (role === "p" || role === "porn")           role_id = id.P;
     else {
         message.reply('please enter one of the assignable roles mentioned in the post above.')
         .then(msg => {
