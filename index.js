@@ -25,6 +25,10 @@ client.on('guildMemberAdd', member => {
     const log_channel = member.guild.channels.cache.get(id.log_channel);
     log_channel.send(embed.join(member));
 
+    if (!member.roles.cache.has(id.uncharted)) {
+        member.roles.add(id.uncharted);
+    }
+
     const welcome_chat = member.guild.channels.cache.get(id.welcome_chat);
     const welcome_channel = member.guild.channels.cache.get(id.welcome).toString();
 
@@ -45,8 +49,6 @@ client.on('message', message => {
     if (message.author.bot) return;
     if (message.content.startsWith(config.prefix)) msgCommand(message);
     if (message.channel.id === id.assign_roles) msgToggleRoles(message);
-    if (message.channel.id === id.patron_chat) msgPatron(message);
-    if (message.channel.id === id.testing) message.channel.send(embed.leave(message.member));
 });
 
 function msgCommand(message) {
@@ -98,12 +100,5 @@ function msgToggleRoles(message) {
     message.delete(); // Delete the user's message.
 
 };
-
-function msgPatron(message) {
-
-    method_attribute = ['flying', 'skilled', 'rolling', 'specialized', 'climbing', 'secret', 'highly educated', 'tiny'];
-    method_object = ['pidgeons', 'polar bears', 'kittens', 'penguins', 'sharks', 'trucks', 'turtles', 'pandas', 'nuggets', 'monkeys'];
-
-}
 
 client.login(config.token);
