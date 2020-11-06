@@ -2,6 +2,9 @@ module.exports = {
     name: 'test',
     description: 'Just a test.',
     execute(message, args) {
-        message.channel.send('Your args are: ' + args);
+        const fauna = require('../modules/fauna')
+
+        const doc = fauna.test();
+        message.channel.send(`response: ${doc}`);
     }
 };

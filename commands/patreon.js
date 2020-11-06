@@ -1,6 +1,6 @@
 module.exports = {
     name: 'patreon',
-    description: 'Used by patrons to claim their rewards.',
+    description: 'Used by Patrons to claim rewards.',
     execute(message, args) {
 
         const id = require('../variables/ids.json');

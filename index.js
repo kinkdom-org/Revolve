@@ -1,23 +1,31 @@
 const fs = require('fs');
-const Discord = require('discord.js');
-const config = require('./config.json');
-const id = require('./variables/ids.json');
-const embed = require('./modules/embed.js');
 
+// DISCORD
+const Discord = require('discord.js');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+// CUSTOM VARIABLES
+const config = require('./config.json');
+const id = require('./variables/ids.json');
 
+// CUSTOM MODULES
+const embed = require('./modules/embed');
+const introReport = require('./modules/intro_report');
+const log = require('./modules/log');
+
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
     client.commands.set(command.name, command);
 }
 
-const welcome_msgs = ["Welcome to Kinkdom", "Welcome aboard", "Hello, and welcome", "Welcome to the Kinkdom Empire", "Greetings"];
+const welcome_msgs = ["Welcome to Kinkdom", "Welcome aboard", "Hello, and welcome", "Welcome to the Kinkdom Empire", "Greetings", "Welcome to the server"];
+const community_rooms = [id.community_rooms_1, id.community_rooms_2, id.community_rooms_3]
 
 client.once('ready', () => {
-	console.log('Ready!\n');
+    console.log('Ready!\n');
+    client.user.setActivity('Loyal Kinkdom Guardian');
 });
 
 client.on('guildMemberAdd', member => {
@@ -46,9 +54,19 @@ client.on('guildMemberRemove', member => {
 });
 
 client.on('message', message => {
+    log.post(message);
     if (message.author.bot) return;
     if (message.content.startsWith(config.prefix)) msgCommand(message);
     if (message.channel.id === id.assign_roles) msgToggleRoles(message);
+    if (message.channel.id === id.introductions && message.member.roles.cache.has(id.uncharted)) {
+        let response = introReport.start(message);
+        if (!response) return;
+        message.channel.send(response)
+        .then(post => {
+            post.delete({timeout: 600_000});
+        }).catch();
+    }
+    if (community_rooms.includes(message.channel.parent.id)) logMessage(message);
 });
 
 function msgCommand(message) {
@@ -62,7 +80,11 @@ function msgCommand(message) {
 		client.commands.get(command).execute(message, args);
 	} catch (error) {
 		console.error(error);
-		message.reply('there was an error trying to execute that command.');
+        message.reply('there was an error trying to execute that command.')
+        .then(msg => {
+            msg.delete({timeout:10000}) // Delete reply after 10 seconds.
+        })
+        .catch();
 	}
 };
 
@@ -101,4 +123,9 @@ function msgToggleRoles(message) {
 
 };
 
+function logMessage(message) {
+    console.log("Message in category found!");
+}
+
 client.login(config.token);
+

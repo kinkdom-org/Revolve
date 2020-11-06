@@ -1,0 +1,11 @@
+type User {
+    handle: String!
+    userid: String!
+    posts: [Post!]
+}
+
+type Post {
+    ts: Date!
+    text: String!
+    author: User!
+}
