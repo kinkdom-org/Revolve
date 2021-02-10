@@ -9,11 +9,7 @@ module.exports = {
         if (!message.member.roles.cache.some((role) => role.name === 'Staff')) return;
         //if (!message.member.roles.has(id.staff)) return;
 
-        console.log('Got here 3');
-
         let mention = message.mentions.users.first();
-
-        console.log(mention);
 
         if (mention) {
 

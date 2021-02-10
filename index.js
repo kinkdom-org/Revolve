@@ -54,6 +54,7 @@ client.on('guildMemberRemove', member => {
 });
 
 client.on('message', message => {
+    
     log.post(message);
     if (message.author.bot) return;
     if (message.content.startsWith(config.prefix)) msgCommand(message);
@@ -80,9 +81,9 @@ function msgCommand(message) {
 		client.commands.get(command).execute(message, args);
 	} catch (error) {
 		console.error(error);
-        message.reply('there was an error trying to execute that command.')
+        message.reply('there was an error trying to execute that command.\n\n```' + error + '```')
         .then(msg => {
-            msg.delete({timeout:10000}) // Delete reply after 10 seconds.
+            msg.delete({timeout:60000}) // Delete reply after 10 seconds.
         })
         .catch();
 	}

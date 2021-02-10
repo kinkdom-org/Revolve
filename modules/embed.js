@@ -1,17 +1,27 @@
 module.exports = {
 
-    create(title, description, image, color) {
+    create(title, description, color, image = null) {
 
         const Discord = require('discord.js');
 
-        const embed = new Discord.MessageEmbed()
-        .setTitle(title)
-        .setDescription(description)
-        .setThumbnail(image)
-        .setColor(color);
-        //.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+        if (image) {
+            return(
+                new Discord.MessageEmbed()
+                    .setTitle(title)
+                    .setDescription(description)
+                    .setColor(color)
+                    .setThumbnail(image)
+                    //.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+            );
+        }
 
-        return(embed);
+        return(
+            new Discord.MessageEmbed()
+                .setTitle(title)
+                .setDescription(description)
+                .setColor(color)
+                //.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+        );
 
     },
 
