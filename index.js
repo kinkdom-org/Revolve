@@ -1,4 +1,8 @@
 const fs = require('fs');
+require('dotenv').config();
+
+const TOKEN = process.env.TOKEN;    // Discord bot token
+const PREFIX = '+';                 // Command prefix
 
 // DISCORD
 const Discord = require('discord.js');
@@ -6,7 +10,6 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
 // CUSTOM VARIABLES
-const config = require('./config.json');
 const id = require('./variables/ids.json');
 
 // CUSTOM MODULES
@@ -57,7 +60,7 @@ client.on('message', message => {
     
     log.post(message);
     if (message.author.bot) return;
-    if (message.content.startsWith(config.prefix)) msgCommand(message);
+    if (message.content.startsWith(PREFIX)) msgCommand(message);
     if (message.channel.id === id.assign_roles) msgToggleRoles(message);
     if (message.channel.id === id.introductions && message.member.roles.cache.has(id.uncharted)) {
         let response = introReport.start(message);
@@ -72,7 +75,7 @@ client.on('message', message => {
 
 function msgCommand(message) {
 
-	const args = message.content.slice(config.prefix.length).trim().split(/ +/);
+	const args = message.content.slice(PREFIX.length).trim().split(/ +/);
 	const command = args.shift().toLowerCase();
 
 	if (!client.commands.has(command)) return;
@@ -128,5 +131,5 @@ function logMessage(message) {
     console.log("Message in category found!");
 }
 
-client.login(config.token);
+client.login(TOKEN);
 
