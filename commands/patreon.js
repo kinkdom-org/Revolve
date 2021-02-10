@@ -3,9 +3,9 @@ module.exports = {
     description: 'Used by Patrons to claim rewards.',
     execute(message, args) {
 
-        const id = require('../variables/ids.json');
+        const channel_id = require('../variables/channel_ids.json');
 
-        if (message.channel.id !== id.patron_chat) return;
+        if (message.channel.id !== channel_id.patron_chat) return;
 
         if (args.length < 2) {
             message.reply("the Patreon commands should look something like this:\n\n`+patreon credit <name>`\n`+patreon headpats <staff-username>`\n\n")
@@ -17,11 +17,11 @@ module.exports = {
             return;
         }
         else if (args[0].toLowerCase() === 'credit') {
-            const channel = message.guild.channels.cache.get(id.staff_highlights);
+            const channel = message.guild.channels.cache.get(channel_id.staff_highlights);
             channel.send(`🔸 <@${message.member.id}> used the \`+patreon credit\` command!\n\nName to be used for website credits page: ${args.slice(1).join(' ')}\n<@279395206024003587>`);
         }
         else if (args[0].toLowerCase() === 'headpats') {
-            const channel = message.guild.channels.cache.get(id.operator_highlights);
+            const channel = message.guild.channels.cache.get(channel_id.operator_highlights);
             channel.send(`🔹 <@${message.member.id}> used the \`+patreon headpats\` command!\n\nStaff member to give headpats: ${args.slice(1).join(' ')}\n*Please react to this post if your name appeared and you have sent the user headpats.*`);
         }
         else {

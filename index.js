@@ -12,7 +12,9 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
 // CUSTOM VARIABLES
-const id = require('./variables/ids.json');
+const category_id = require('./variables/category_ids.json');
+const channel_id = require('./variables/channel_ids.json');
+const role_id = require('./variables/role_ids.json');
 
 // CUSTOM MODULES
 const embed = require('./modules/embed');
@@ -26,7 +28,7 @@ for (const file of commandFiles) {
 }
 
 const welcome_msgs = ["Welcome to Kinkdom", "Welcome aboard", "Hello, and welcome", "Welcome to the Kinkdom Empire", "Greetings", "Welcome to the server"];
-const community_rooms = [id.community_rooms_1, id.community_rooms_2, id.community_rooms_3]
+const community_rooms = [category_id.community_rooms_1, category_id.community_rooms_2, category_id.community_rooms_3]
 
 client.once('ready', () => {
     console.log('Ready!\n');
@@ -35,15 +37,15 @@ client.once('ready', () => {
 
 client.on('guildMemberAdd', member => {
 
-    const log_channel = member.guild.channels.cache.get(id.log_channel);
+    const log_channel = member.guild.channels.cache.get(channel_id.log_channel);
     log_channel.send(embed.join(member));
 
-    if (!member.roles.cache.has(id.uncharted)) {
-        member.roles.add(id.uncharted);
+    if (!member.roles.cache.has(role_id.uncharted)) {
+        member.roles.add(role_id.uncharted);
     }
 
-    const welcome_chat = member.guild.channels.cache.get(id.welcome_chat);
-    const welcome_channel = member.guild.channels.cache.get(id.welcome).toString();
+    const welcome_chat = member.guild.channels.cache.get(channel_id.welcome_chat);
+    const welcome_channel = member.guild.channels.cache.get(channel_id.welcome).toString();
 
     const random = Math.floor(Math.random() * welcome_msgs.length);
 
@@ -53,7 +55,7 @@ client.on('guildMemberAdd', member => {
 
 client.on('guildMemberRemove', member => {
 
-    const log_channel = member.guild.channels.cache.get(id.log_channel);
+    const log_channel = member.guild.channels.cache.get(channel_id.log_channel);
     log_channel.send(embed.leave(member));
 
 });
@@ -63,8 +65,8 @@ client.on('message', message => {
     log.post(message);
     if (message.author.bot) return;
     if (message.content.startsWith(PREFIX)) msgCommand(message);
-    if (message.channel.id === id.assign_roles) msgToggleRoles(message);
-    if (message.channel.id === id.introductions && message.member.roles.cache.has(id.uncharted)) {
+    if (message.channel.id === channel_id.assign_roles) msgToggleRoles(message);
+    if (message.channel.id === channel_id.introductions && message.member.roles.cache.has(role_id.uncharted)) {
         let response = introReport.start(message);
         if (!response) return;
         message.channel.send(response)
@@ -99,15 +101,15 @@ function msgToggleRoles(message) {
     const role = message.content.toLowerCase();
     let role_id = "";
     
-    if      (role === "events" || role === "event")     role_id = id.events;
-    else if (role === "dom")                            role_id = id.dom;
-    else if (role === "sub")                            role_id = id.sub;
-    else if (role === "switch")                         role_id = id.switch;
-    else if (role === "f" || role === "fandom")         role_id = id.F;
-    else if (role === "d" || role === "dark")           role_id = id.D;
-    else if (role === "nh" || role === "non-humanoid")  role_id = id.NH;
-    else if (role === "k" || role === "kink")           role_id = id.K;
-    else if (role === "p" || role === "porn")           role_id = id.P;
+    if      (role === "events" || role === "event")     role_id = role_id.events;
+    else if (role === "dom")                            role_id = role_id.dom;
+    else if (role === "sub")                            role_id = role_id.sub;
+    else if (role === "switch")                         role_id = role_id.switch;
+    else if (role === "f" || role === "fandom")         role_id = role_id.F;
+    else if (role === "d" || role === "dark")           role_id = role_id.D;
+    else if (role === "nh" || role === "non-humanoid")  role_id = role_id.NH;
+    else if (role === "k" || role === "kink")           role_id = role_id.K;
+    else if (role === "p" || role === "porn")           role_id = role_id.P;
     else {
         message.reply('please enter one of the assignable roles mentioned in the post above.')
         .then(msg => {

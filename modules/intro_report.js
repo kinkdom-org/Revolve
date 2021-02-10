@@ -29,7 +29,7 @@ module.exports = {
         );
         */
 
-        let ageString = this.testAge(intro);
+        let ageString = this.testAge(message, intro);
         if (ageString) issues.push(ageString);
 
         let genderString = this.testGender(intro);
@@ -71,7 +71,7 @@ module.exports = {
 
     },
 
-    testAge(intro) {
+    testAge(message, intro) {
 
         let regex = RegExp(/^age:\s*(\D*\b[1-9]?[0-9]\b.*)$/gim);
         const age = intro.match(regex);
@@ -85,7 +85,7 @@ module.exports = {
         const underage = regex.test(age[0]);
         if (underage) {
             const staff_report = require('./staff_report');
-            staff_report.post("underage", intro, age[0])
+            staff_report.post("underage", message, age[0])
             return "You must be an adult to use this server. The staff have been notified.";
         }
 

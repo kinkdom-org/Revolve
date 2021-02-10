@@ -4,7 +4,7 @@ module.exports = {
 
         
 
-        const { staff_report } = require('../variables/ids.json');
+        const { staff_report } = require('../variables/channel_ids.json');
 
         const staff_report_channel = message.member.guild.channels.cache.get(staff_report);
         const post = this.getCaseString(topic, message, detail);
@@ -17,7 +17,7 @@ module.exports = {
 
         switch (topic) {
             case "underage":
-                return `:rotating_light: | User ${message.author.username} provided age ${detail} in their intro.`;
+                return `:rotating_light: | User ${message.author.username} provided \`${detail}\` in their intro. <@&630999522293841941>`;
         
             default:
                 break;
