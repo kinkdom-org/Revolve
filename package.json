@@ -1,7 +1,6 @@
 {
   "name": "revolve",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,5 +13,14 @@
   },
   "devDependencies": {
     "dotenv": "^8.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kinkdom-org/Revolve.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kinkdom-org/Revolve/issues"
+  },
+  "homepage": "https://github.com/kinkdom-org/Revolve#readme",
+  "description": ""
 }
