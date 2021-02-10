@@ -1,5 +1,8 @@
 const fs = require('fs');
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
 
 const TOKEN = process.env.TOKEN;    // Discord bot token
 const PREFIX = '+';                 // Command prefix
