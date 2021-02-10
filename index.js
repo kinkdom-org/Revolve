@@ -99,17 +99,17 @@ function msgCommand(message) {
 function msgToggleRoles(message) {
 
     const role = message.content.toLowerCase();
-    let role_id = "";
+    let role_id_str = "";
     
-    if      (role === "events" || role === "event")     role_id = role_id.events;
-    else if (role === "dom")                            role_id = role_id.dom;
-    else if (role === "sub")                            role_id = role_id.sub;
-    else if (role === "switch")                         role_id = role_id.switch;
-    else if (role === "f" || role === "fandom")         role_id = role_id.F;
-    else if (role === "d" || role === "dark")           role_id = role_id.D;
-    else if (role === "nh" || role === "non-humanoid")  role_id = role_id.NH;
-    else if (role === "k" || role === "kink")           role_id = role_id.K;
-    else if (role === "p" || role === "porn")           role_id = role_id.P;
+    if      (role === "events" || role === "event")     role_id_str = role_id.events;
+    else if (role === "dom")                            role_id_str = role_id.dom;
+    else if (role === "sub")                            role_id_str = role_id.sub;
+    else if (role === "switch")                         role_id_str = role_id.switch;
+    else if (role === "f" || role === "fandom")         role_id_str = role_id.F;
+    else if (role === "d" || role === "dark")           role_id_str = role_id.D;
+    else if (role === "nh" || role === "non-humanoid")  role_id_str = role_id.NH;
+    else if (role === "k" || role === "kink")           role_id_str = role_id.K;
+    else if (role === "p" || role === "porn")           role_id_str = role_id.P;
     else {
         message.reply('please enter one of the assignable roles mentioned in the post above.')
         .then(msg => {
@@ -120,11 +120,11 @@ function msgToggleRoles(message) {
         return;
     }
 
-    if (message.member.roles.cache.has(role_id)) {
-        message.member.roles.remove(role_id);
+    if (message.member.roles.cache.has(role_id_str)) {
+        message.member.roles.remove(role_id_str);
     }
     else {
-        message.member.roles.add(role_id);
+        message.member.roles.add(role_id_str);
     }
 
     message.delete(); // Delete the user's message.
