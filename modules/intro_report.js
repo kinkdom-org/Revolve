@@ -189,7 +189,7 @@ module.exports = {
 
             let fix_issues_1 = this.rand(["To prevent long waits and multiple revisions,", "To expedite the approval process,", "No one likes long waits, so"]);
             let fix_issues_2 = this.rand(["I've made a convenient list of things you should do to improve your intro.", "I've gathered a handy list of things you should do to improve your introduction further."]);
-            let end = "Feel free to repost your introduction once you've made these changes, and I'll be happy to review it again!";
+            let end = "Feel free to repost your introduction once you have made these changes, and I'll be happy to review it again!";
 
             let issue_list = this.buildIssueList(issues);
 
@@ -198,9 +198,9 @@ module.exports = {
         }
         else if (issues.length == 1) {
 
-            let fix_issue_1 = this.rand(["You're doing great!", "Almost there!", "You're getting close to approval!", "All the lewds are almost within reach!", "Next stop: The Kinkdom EMPIRE!"])
+            let fix_issue_1 = this.rand(["You're doing great!", "Almost there!", "You're getting close!"])
             let fix_issue_2 = this.rand(["I've found one thing you should do to improve your introduction:", "There's still one thing you should do to improve your intro:", "A problem was detected and I would love to assist you in solving it:"])
-            let end = "Feel free to repost your introduction once you've done the above, and I'll be happy to review it again!";
+            let end = "Feel free to repost your introduction once you have done the above, and I'll be happy to review it again!";
 
             let issue_list = this.buildIssueList(issues);
 
