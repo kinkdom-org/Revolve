@@ -15,6 +15,8 @@ Revolve focuses mostly on moderative tasks. Here's a list of key features:
 
 ## Upcoming
 
-One of the goals is to make the bot simple to configure for other servers. The bot was designed with Kinkdom in mind, so various ids are hard coded into the id .json files. I'm hoping to slowly move away from this, and towards a more general purpose application, without sacrificing its functionality on Kinkdom.
+One of the current goals is to make the bot simple to configure for other servers. The bot was designed with Kinkdom in mind, so various ids are hard coded into the id .json files. I'm hoping to slowly move away from this, and towards a more general purpose application, without sacrificing its functionality on Kinkdom.
+
+Further documentation will be made.
 
 See the [Project board](https://github.com/kinkdom-org/Revolve/projects/1) for new, upcoming features.
