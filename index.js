@@ -20,6 +20,7 @@ const role_id = require('./variables/role_ids.json');
 const embed = require('./modules/embed');
 const introReport = require('./modules/intro_report');
 const log = require('./modules/log');
+const toggleRoles = require('./modules/toggle_roles.js');
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
@@ -65,7 +66,7 @@ client.on('message', message => {
     log.post(message);
     if (message.author.bot) return;
     if (message.content.startsWith(PREFIX)) msgCommand(message);
-    if (message.channel.id === channel_id.assign_roles) msgToggleRoles(message);
+    if (message.channel.id === channel_id.assign_roles) toggleRoles.run(message);
     if (message.channel.id === channel_id.introductions && message.member.roles.cache.has(role_id.uncharted)) {
         let response = introReport.start(message);
         if (!response) return;
@@ -94,41 +95,6 @@ function msgCommand(message) {
         })
         .catch();
 	}
-};
-
-function msgToggleRoles(message) {
-
-    const role = message.content.toLowerCase();
-    let role_id_str = "";
-    
-    if      (role === "events" || role === "event")     role_id_str = role_id.events;
-    else if (role === "dom")                            role_id_str = role_id.dom;
-    else if (role === "sub")                            role_id_str = role_id.sub;
-    else if (role === "switch")                         role_id_str = role_id.switch;
-    else if (role === "f" || role === "fandom")         role_id_str = role_id.F;
-    else if (role === "d" || role === "dark")           role_id_str = role_id.D;
-    else if (role === "nh" || role === "non-humanoid")  role_id_str = role_id.NH;
-    else if (role === "k" || role === "kink")           role_id_str = role_id.K;
-    else if (role === "p" || role === "porn")           role_id_str = role_id.P;
-    else {
-        message.reply('please enter one of the assignable roles mentioned in the post above.')
-        .then(msg => {
-            msg.delete({timeout:10000}) // Delete reply after 10 seconds.
-        })
-        .catch();
-        message.delete(); // Delete the user's message.
-        return;
-    }
-
-    if (message.member.roles.cache.has(role_id_str)) {
-        message.member.roles.remove(role_id_str);
-    }
-    else {
-        message.member.roles.add(role_id_str);
-    }
-
-    message.delete(); // Delete the user's message.
-
 };
 
 function logMessage(message) {
