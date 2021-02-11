@@ -4,24 +4,15 @@ module.exports = {
 
         const Discord = require('discord.js');
 
-        if (image) {
-            return(
-                new Discord.MessageEmbed()
-                    .setTitle(title)
-                    .setDescription(description)
-                    .setColor(color)
-                    .setThumbnail(image)
-                    //.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
-            );
-        }
+        const embed = new Discord.MessageEmbed()
+            .setTitle(title)
+            .setDescription(description)
+            .setColor(color)
+            //.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+        
+        if (image) embed.setThumbnail(image);
 
-        return(
-            new Discord.MessageEmbed()
-                .setTitle(title)
-                .setDescription(description)
-                .setColor(color)
-                //.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
-        );
+        return(embed);
 
     },
 
@@ -30,11 +21,11 @@ module.exports = {
         const Discord = require('discord.js');
 
         const embed = new Discord.MessageEmbed()
-        .setTitle('User joined!')
-        .setDescription(`<@${member.id}> has joined the server!`)
-        .setThumbnail(member.user.avatarURL())
-        .setColor('#69FF4F')
-        .setFooter(`${member.displayName} - ${member.id}`);
+            .setTitle('User joined!')
+            .setDescription(`<@${member.id}> has joined the server!`)
+            .setThumbnail(member.user.avatarURL())
+            .setColor('#69FF4F')
+            .setFooter(`${member.displayName} - ${member.id}`);
 
         return(embed);
 
@@ -45,11 +36,11 @@ module.exports = {
         const Discord = require('discord.js');
 
         const embed = new Discord.MessageEmbed()
-        .setTitle('User left...')
-        .setDescription(`<@${member.id}> has left the server.`)
-        .setThumbnail(member.user.avatarURL())
-        .setColor('#5BAAFF')
-        .setFooter(`${member.displayName} - ${member.id}`);
+            .setTitle('User left...')
+            .setDescription(`<@${member.id}> has left the server.`)
+            .setThumbnail(member.user.avatarURL())
+            .setColor('#5BAAFF')
+            .setFooter(`${member.displayName} - ${member.id}`);
 
         return(embed);
 
