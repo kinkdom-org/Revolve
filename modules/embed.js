@@ -7,7 +7,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setTitle(title)
             .setDescription(description)
-            .setColor(color)
+            .setColor(color);
             //.setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
         
         if (image) embed.setThumbnail(image);
@@ -23,8 +23,8 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setTitle('User joined!')
             .setDescription(`<@${member.id}> has joined the server!`)
-            .setThumbnail(member.user.avatarURL())
             .setColor('#69FF4F')
+            .setThumbnail(member.user.avatarURL())
             .setFooter(`${member.displayName} - ${member.id}`);
 
         return(embed);
@@ -38,8 +38,8 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setTitle('User left...')
             .setDescription(`<@${member.id}> has left the server.`)
-            .setThumbnail(member.user.avatarURL())
             .setColor('#5BAAFF')
+            .setThumbnail(member.user.avatarURL())
             .setFooter(`${member.displayName} - ${member.id}`);
 
         return(embed);
