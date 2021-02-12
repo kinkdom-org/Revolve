@@ -10,7 +10,7 @@ Revolve focuses mostly on moderative tasks. Here's a list of key features:
 * Provides a thorough response to a user when they post their intro, letting them know how they can improve.
 * Neatly logs server activity to console and to server channels.
 * Allows a member to toggle assignable roles to their liking.
-* Provides commands for staff to use to approve new users and to reset roleplay rooms.
+* Provides commands for staff to approve new users, to reset roleplay rooms, to list users with a certain role, and mass assign roles.
 
 
 ## Upcoming
