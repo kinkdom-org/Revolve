@@ -18,8 +18,11 @@ module.exports = {
                     users.push(`<@${user.user.id}>`);
                 });
 
-                if (users.length < 50) { // Mentions all users in chat if less than 50 
+                if (users.length <= 50) { // Mentions all users in chat if less than 50
                     message.channel.send(users);
+                }
+                else {
+                    message.channel.send(`${users.slice(0,50)} and ${hasRole.size - 50} more.`);
                 }
                 
 
