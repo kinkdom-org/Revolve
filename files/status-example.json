@@ -1,0 +1,18 @@
+{
+    "public": {
+        "fantasy": {
+            "forest": {
+                "status": "open"
+            },
+            "village": {
+                "status": "closed"
+            }
+        },
+        "modern": {
+
+        },
+        "sci-fi": {
+
+        }
+    }
+}
