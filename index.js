@@ -21,6 +21,7 @@ const embed = require('./modules/embed');
 const introReport = require('./modules/intro_report');
 const log = require('./modules/log');
 const toggleRoles = require('./modules/toggle_roles.js');
+const backup_log = require('./modules/backup_log');
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
@@ -75,7 +76,7 @@ client.on('message', message => {
             post.delete({timeout: 600_000});
         }).catch();
     }
-    if (community_rooms.includes(message.channel.parent.id)) logMessage(message);
+    if (community_rooms.includes(message.channel.parent.id)) backup_log.run(message);
 });
 
 function msgCommand(message) {
@@ -96,10 +97,6 @@ function msgCommand(message) {
         .catch();
 	}
 };
-
-function logMessage(message) {
-    console.log("Message in category found!");
-}
 
 client.login(TOKEN);
 
