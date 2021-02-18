@@ -12,8 +12,6 @@ module.exports = {
 
         message.channel.messages.fetch({ limit: 100 }).then(fetchedMessages => {
 
-            let string = "";
-
             let messages = [];
 
             fetchedMessages.forEach(message => {
@@ -22,13 +20,15 @@ module.exports = {
 
             messages = messages.reverse();
 
+            let string = "";
+
             messages.forEach(message => {
                 string += message.author.username + " - " + message.createdAt + ":\n\n";
                 string += message.content + "\n\n";
                 string += "--------------------\n\n"
             });
 
-            const file = "./backup_files/" + message.channel + ".txt";
+            const file = "./backup_files/" + message.channel.id + ".txt";
 
             fs.writeFile(file, string, function(err, result) {
                 if(err) console.log('error', err);
