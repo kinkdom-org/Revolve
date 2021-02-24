@@ -60,10 +60,10 @@ module.exports = {
         function postMessage(message, file) {
 
             backup_log_channel.send(
-                `:notebook_with_decorative_cover:  <#${message.channel.id}> - ID: \`${message.channel.id}\`\nLast post by ${message.author.name}`,
+                `:inbox_tray:  <#${message.channel.id}> - ID: \`${message.channel.id}\`\nLast post by ${message.author.name}`,
                 { files: [file] }
             ).then(msg => {
-                msg.edit(`:notebook_with_decorative_cover:  <#${message.channel.id}> - ID: \`${message.channel.id}\`\nLast post by <@!${message.author.id}>`)
+                msg.edit(`:inbox_tray:  <#${message.channel.id}> - ID: \`${message.channel.id}\`\nLast post by <@!${message.author.id}>`)
             });
 
         }
